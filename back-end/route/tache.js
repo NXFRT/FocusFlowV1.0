@@ -38,7 +38,7 @@ router.put('/:id', async (req, res) => {
         tache.description = req.body.description;
         tache.completed = req.body.completed;
 
-        const modifiertache = await tach .save();
+        const modifiertache = await tache.save();
         res.json(modifiertache);
     } catch (err) {
         res.status(404).send('Erreur lors de la mise à jour de la tâche');

@@ -1,5 +1,0 @@
-
-CREATE TABLE IF NOT EXISTS role (
-    idrole INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR (100)
-);
