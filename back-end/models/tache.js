@@ -9,6 +9,6 @@ const tacheshema = new mongoose.Schema({
     createdAt: { type: Date, Default: Date.now}
 });
 
-const tache = mongoose.model('Tache', tacheshema);
+const tache = mongoose.model('tache', tacheshema);
 
-module.exports = tache
+module.exports = tache;

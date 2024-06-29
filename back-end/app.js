@@ -1,6 +1,6 @@
 
-require('./route/tache')
-
+const tacheroute = require('./route/tache')
+const projetroute = require('./route/projet')
 
 const express = require('express');
 const app = express();
@@ -23,14 +23,15 @@ app.listen(port, () => {
 
 
 //Connection a MongoDB
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const router = require('./route/tache');
 
-mongoose.connect ('mongodb://localhost/focusflow', {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => console.log('connecté à MongoDB'))
+mongoose.connect ('mongodb://localhost/focusflow')
+    .then(() => console.log('connecté à MongoDB sur le serveur : http://localhost:3000'))
     .catch(err => console.error('erreur de connection à MongoDB', err));
 
 
 //Utilisation des routes
-//app.use('/api/tache', tacheRoutes)
-
+app.use('/api/tache', router);
+app.use('/api/projet', router);
 
