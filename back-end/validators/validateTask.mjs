@@ -2,9 +2,8 @@
 import Project from '../models/m_project.mjs';
 import Task from '../models/m_task.mjs';
 import User from '../models/m_user.mjs';
-import { body, validationResult } from 'express-validators';
-import mongoose from 'mongoose';
-
+import { body, validationResult } from 'express-validator';
+ 
 const validateTask = [
     body('title').trim().escape().isLength({ min: 1 }).withMessage('Title is required'),
     body('description').trim().escape().optional(),
@@ -31,4 +30,4 @@ const validateTask = [
         })
 ];
 
-export default validateTask
+export default validateTask;

@@ -7,6 +7,7 @@ import Project from '../models/m_project.mjs';
 import User from '../models/m_user.mjs'; 
 import validateTask from '../validators/validateTask.mjs';
 import xss from 'xss';
+import authenticateToken from '../middleware/authenticateToken.mjs'
 
 
 
@@ -33,7 +34,7 @@ taskRoute.get('/:id', async (req, res) => {
 });
 
 // Route pour ajoûter une task
-taskRoute.post('/', validateTask, async (req, res) => {
+taskRoute.post('/', authenticateToken ,validateTask, async (req, res) => {
     // Récupérer les résultats de validation des middlewares
     const errors = validationResult(req);
     // Si des erreurs de validation sont trouvées, envoyer une réponse 400 avec les détails des erreurs

@@ -5,6 +5,8 @@ import User from '../models/m_user.mjs';
 import xss from 'xss';
 import jwt from 'jsonwebtoken';
 import validateUser from '../validators/validateUser.mjs';
+import authenticateToken from '../middleware/authenticateToken.mjs'
+
 
 
 
@@ -38,17 +40,6 @@ userRoute.post('/register', validateUser, async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const signupSchema = Joi.object({
-        username: Joi.string().min(3).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().min(6).required()
-    });
-    
-    const { error } = signupSchema.validate(req.body);
-    if (error) {
-        return res.status(400).json({ errors: error.details });
-    }
-
     const { username, email, password } = req.body;
 
     try {
@@ -72,15 +63,6 @@ userRoute.post('/register', validateUser, async (req, res) => {
 
 // Route pour la connexion
 userRoute.post('/login', async (req, res) => {
-    const loginSchema = Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().min(8).required()
-    });
-
-    const { error } = loginSchema.validate(req.body);
-    if (error) {
-        return res.status(400).json({ errors: error.details });
-    }
 
     const { email, password } = req.body;
 
@@ -107,17 +89,6 @@ userRoute.put('/:id', validateUser, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
-    }
-
-    const updateSchema = Joi.object({
-        username: Joi.string().min(3).optional(),
-        email: Joi.string().email().optional(),
-        password: Joi.string().min(8).optional()
-    });
-
-    const { error } = updateSchema.validate(req.body);
-    if (error) {
-        return res.status(400).json({ errors: error.details });
     }
 
     const { username, email, password } = req.body;

@@ -8,6 +8,8 @@ import settingsRoute from './route/r_settings.mjs';
 import taskRoute from './route/r_task.mjs';
 import userRoute from './route/r_user.mjs';
 import bodyParser from 'body-parser';
+import authenticateToken from './middleware/authenticateToken.mjs';
+
 
 
 const app = express();
@@ -38,8 +40,8 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use('/api/analyse', analyseRoute);
 app.use('/api/task', notifRoute);
-app.use('/api/project', projectRoute);
-app.use('/api/users', settingsRoute);
-app.use('/api/task', taskRoute);
-app.use('/api/users', userRoute);
+app.use('/api/project', authenticateToken, projectRoute);
+app.use('/api/settings', settingsRoute);
+app.use('/api/task', authenticateToken, taskRoute);
+app.use('/api/user', userRoute);
 

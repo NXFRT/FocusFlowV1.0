@@ -4,6 +4,7 @@ const settingsroute = express.Router();
 import { body, validationResult } from 'express-validator'
 import Settings from '../models/m_settings.mjs';
 
+
 settingsroute.get('/', async(req, res) => {
     try {
         

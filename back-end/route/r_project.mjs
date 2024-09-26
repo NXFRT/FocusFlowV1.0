@@ -3,8 +3,11 @@ import express from 'express';
 const projectRoute = express.Router();
 import { body, validationResult } from 'express-validator';
 import Project from '../models/m_project.mjs';
+import validateProject from '../validators/validateProject.mjs';
 import User from '../models/m_user.mjs';
 import xss from 'xss';
+import authenticateToken from '../middleware/authenticateToken.mjs'
+
 
 
 projectRoute.get('/', async (req, res) => {
@@ -27,7 +30,7 @@ projectRoute.get('/:id', async(req, res) => {
     }
 });
 
-projectRoute.post('/', validateProject, async (req, res) => {
+projectRoute.post('/', authenticateToken, validateProject, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
