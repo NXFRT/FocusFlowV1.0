@@ -1,0 +1,27 @@
+{
+  "name": "focusflow",
+  "version": "1.0.0",
+  "main": "app.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.mjs",
+    "dev": "nodemon app.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^8.4.4",
+    "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
